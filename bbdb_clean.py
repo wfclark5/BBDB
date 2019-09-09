@@ -1,10 +1,43 @@
-import pandas
 import os.path
 import os
+import urllib
+from requests import post
+import sys
+import pandas
+import json
+import numpy as np
+from collections import Counter
+import re
 
 path = os.path.dirname(os.path.realpath(__file__))
 
-bbdb = pandas.read_csv(path + r"\bbdb_all.csv")
+
+def getData(data):
+    r = post("https://redcap.duke.edu/redcap/api/", data)
+    r.content
+    d = urllib.parse.urlencode(data).encode("utf-8")
+    req = urllib.request.Request("https://redcap.duke.edu/redcap/api/", d)
+    response = urllib.request.urlopen(req)
+    file = response.read()
+    result = json.loads(file)
+    df = pandas.DataFrame.from_records(result)
+    return df
+
+
+#This data extract is for pulling out all of the MCHAT scores from within the P1 database
+
+data = {
+    'token': '8FF029F74E24581A2664ECD43CE7F5FA',
+    'content': 'report',
+    'format': 'json',
+    'report_id': '18651',
+    'rawOrLabel': 'raw',
+    'rawOrLabelHeaders': 'raw',
+    'exportCheckboxLabel': 'false',
+    'returnFormat': 'json'
+}
+
+bbdb = getData(data)
 
 ##These first few lines will get rid of all data that has bot been completed. This typically happens when someone opens a survey but doesn't do anything else
 
