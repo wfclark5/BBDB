@@ -8,6 +8,14 @@ import json
 import numpy as np
 from collections import Counter
 import re
+import time
+from datetime import datetime
+
+today = str(datetime.today().strftime('%Y-%m-%d' +'_' +'%H%M'))
+
+print("The task has succesfully started")
+
+print(str(datetime.today()))
 
 path = os.path.dirname(os.path.realpath(__file__))
 
@@ -60,6 +68,11 @@ final_df.to_csv(path + r"\registry_participants.csv", index=False)
 duplicated = duplicates[duplicates["is_duplicated"] == True]
 
 duplicated.to_csv(path + r"\duplicate_potential.csv", index=False)
+
+print("Successfully Completed")
+time.sleep(30)
+
+
 
 ###these commented out lines of code will create your duplicate file
 
