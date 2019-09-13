@@ -10,6 +10,17 @@ from collections import Counter
 import re
 import time
 from datetime import datetime
+from pathlib import Path
+p = Path(__file__).parents[1]
+api_keys = pandas.read_csv(str(p) + r"\api_keys.csv")
+api_p1 = api_keys["API Key"][0]
+api_p2 = api_keys["API Key"][1]
+api_p3 = api_keys["API Key"][2]
+api_arc = api_keys["API Key"][3]
+api_ready = api_keys["API Key"][4]
+api_mchat = api_keys["API Key"][5]
+api_enrollment = api_keys["API Key"][6]
+api_bbdb = api_keys["API Key"][7]
 
 today = str(datetime.today().strftime('%Y-%m-%d' +'_' +'%H%M'))
 
@@ -35,7 +46,7 @@ def getData(data):
 #This data extract is for pulling out all of the MCHAT scores from within the P1 database
 
 data = {
-    'token': '8FF029F74E24581A2664ECD43CE7F5FA',
+    'token': 'str(api_bbdb)',
     'content': 'report',
     'format': 'json',
     'report_id': '18651',
