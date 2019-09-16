@@ -46,7 +46,7 @@ def getData(data):
 #This data extract is for pulling out all of the MCHAT scores from within the P1 database
 
 data = {
-    'token': 'str(api_bbdb)',
+    'token': str(api_bbdb),
     'content': 'report',
     'format': 'json',
     'report_id': '18651',
